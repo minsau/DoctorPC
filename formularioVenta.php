@@ -1,18 +1,107 @@
+<?php
+session_start();
+require_once("includes/connection.php");
+require_once("includes/header.php");
+	if(!isset($_SESSION['empleado'])){
+		echo "<script type='text/javascript' >
+        alert('No estas logueado');
+      </script>
+      ";
+		
+	}else{
+	$sql = "SELECT * FROM Persona where idPersona='".$_SESSION['empleado']."'";
+	$res = mysql_query($sql,$conexion) or die(mysql_error());
+	$reg = mysql_fetch_array($res) or die(mysql_error());
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Nueva Venta</title>
+	<title>Venta</title>
 	<link rel="stylesheet" type="text/css" href="includes/style.css">
+	<script type="text/javascript">
+		var posicionCampo = 1;
+		function agregarUsuario(opc) {
+		    nuevaFila = document.getElementById("tablaCompra").insertRow(-1);
+		    nuevaFila.id = posicionCampo;
+		    nuevaCelda = nuevaFila.insertCell(-1);
+		    nuevaCelda.innerHTML = "<td><input type='text' size='15' name='cantidad[" + posicionCampo + "]'></td>";
+		    if(opc == 1){
+		    	nuevaCelda = nuevaFila.insertCell(-1);
+		    	nuevaCelda.innerHTML = "<td><select name='opcion[" + posicionCampo + "]' placeholder='Articulo'>"+
+		    	<?php 
+		    		$sqlArti = "SELECT * FROM articulo";
+		    		$resArti = mysql_query($sqlArti,$conexion);
+		    		while($regArti = mysql_fetch_array($resArti)){
+		    	?>
+		    	"<option><?php echo $regArti['claveArticulo'];?></option>"+
+
+		    	<?php
+		    		}
+		    	?>
+		    	"</select></td>";
+			}else{
+		    	nuevaCelda = nuevaFila.insertCell(-1);
+		    	nuevaCelda.innerHTML = "<td><select  name='opcion[" + posicionCampo + "]' placeholder='Servicio'>"+ 
+		    	<?php 
+		    		$sqlSer = "SELECT * FROM servicio";
+		    		$resSer = mysql_query($sqlSer,$conexion);
+		    		while($regSer = mysql_fetch_array($resSer)){
+		    	?>
+		    	"<option><?php echo $regSer['claveServicio'];?></option>"+
+
+		    	<?php
+		    		}
+		    	?>
+		    	"</select></td>";
+		   	}
+		   	nuevaCelda = nuevaFila.insertCell(-1);
+		    nuevaCelda.innerHTML = "<td><input type='text' size='10' name='descripcion[" + posicionCampo + "]'></td>";
+		    nuevaCelda = nuevaFila.insertCell(-1);
+		    nuevaCelda.innerHTML = "<td><input type='text' size='10' name='precio[" + posicionCampo + "]'></td>";
+		    nuevaCelda = nuevaFila.insertCell(-1);
+		    nuevaCelda.innerHTML = "<td><input type='button' value='Eliminar' onclick='eliminarUsuario(this)'></td>";
+		    posicionCampo++;
+		}
+		function eliminarUsuario(obj) {
+		    var oTr = obj;
+		    while(oTr.nodeName.toLowerCase() != 'tr') {
+		        oTr=oTr.parentNode;
+		    }
+		    var root = oTr.parentNode;
+		    root.removeChild(oTr);
+
+		}
+	</script>
 </head>
 <body>
 	<div class="container">
-		Cliente:
-		Fecha:
-		Atendio:
-		<div class="form" method="post" action="">
-			
-		</div>
+	Cliente:<br>
+	Atendió:<?php echo "  ".$reg['nombresPersona']." ".$reg['aPaterno']." ".$reg['aMaterno']."<br>"; ?>
+	Fecha:<?php echo " ".date('d-m-y'); ?><br>
+		<table id="tablaCompra" >
+			<tr>
+				<td>
+					Cantidad
+				</td>
+				
+				<td>
+					Opcion	
+				</td>
+				<td>
+					Descripcion
+				</td>
+				<td>
+					Precio
+				</td>
+			</tr>
+		</table>
+		<button onclick="agregarUsuario(1)"> Agregar Articulo</button>
+		<button onclick="agregarUsuario(2)"> Agregar Servicio</button>
 	</div>
 </body>
 </html>
+<?php
+}
+?>

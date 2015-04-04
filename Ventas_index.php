@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("includes/connection.php");
+require_once("includes/header.php");
 	if(!isset($_SESSION['empleado'])){
 		echo "<script type='text/javascript' >
         alert('No estas logueado');
