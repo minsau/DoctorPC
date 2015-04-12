@@ -2,6 +2,7 @@
 session_start();
 require_once("includes/connection.php");
 require_once("includes/header.php");
+require_once("buscarHoras.php");
 	if(!isset($_SESSION['empleado'])){
 		echo "<script type='text/javascript' >
         alert('No estas logueado');
@@ -20,9 +21,12 @@ require_once("includes/header.php");
 	<meta charset="UTF-8">
 	<title>Venta</title>
 	<link rel="stylesheet" type="text/css" href="includes/style.css">
+	<script type="text/javascript" src="includes/jquery.js"></script>
+	<script type="text/javascript" src="includes/ajax.js"></script>
+	<script type="text/javascript" src="includes/script.js"></script>
 	<script type="text/javascript">
 		var posicionCampo = 1;
-		function agregarUsuario(opc) {
+		function agregarUsuario(opc,precio) {
 		    nuevaFila = document.getElementById("tablaCompra").insertRow(-1);
 		    nuevaFila.id = posicionCampo;
 		    nuevaCelda = nuevaFila.insertCell(-1);
@@ -59,7 +63,7 @@ require_once("includes/header.php");
 		   	nuevaCelda = nuevaFila.insertCell(-1);
 		    nuevaCelda.innerHTML = "<td><input type='text' size='10' name='descripcion[" + posicionCampo + "]'></td>";
 		    nuevaCelda = nuevaFila.insertCell(-1);
-		    nuevaCelda.innerHTML = "<td><input type='text' size='10' name='precio[" + posicionCampo + "]'></td>";
+		    nuevaCelda.innerHTML = "<td><input type='text' size='10' name='precio[" + posicionCampo + "]' value = '" +precio+"'></td>";
 		    nuevaCelda = nuevaFila.insertCell(-1);
 		    nuevaCelda.innerHTML = "<td><input type='button' value='Eliminar' onclick='eliminarUsuario(this)'></td>";
 		    posicionCampo++;
@@ -87,7 +91,7 @@ require_once("includes/header.php");
 				</td>
 				
 				<td>
-					Opcion	
+					Producto	
 				</td>
 				<td>
 					Descripcion
@@ -97,7 +101,7 @@ require_once("includes/header.php");
 				</td>
 			</tr>
 		</table>
-		<button onclick="agregarUsuario(1)"> Agregar Articulo</button>
+		<button onclick="openVentana()"> Agregar Articulo</button>
 		<button onclick="agregarUsuario(2)"> Agregar Servicio</button>
 	</div>
 </body>
