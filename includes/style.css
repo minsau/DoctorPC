@@ -20,6 +20,7 @@ body{
 	font-size: 14px;
 }
 #resultados{
+	z-index: 100;
 	min-height: 290px;
 }
 #header{
@@ -101,12 +102,34 @@ body{
 	z-index:1;
 }
 
-.cerrar{
-	
+#form-NuevoCliente{
+	top: 30%;
+	left: 30%;
+	background-color:#FFF ;
+	padding: 25px;
+	color: #666;
+	position: absolute;
+}
+
+
+.cerrar{	
 	font-weight: 900;
 	text-align: right;
 }
 
 .cerrar a{
 	color: red;
+}
+
+#datos{
+	background-color: #FFF;
+	border-color: #000;
+	border-style: solid;
+	color: #FFF;
+	position: absolute;
+	top: 55%;
+	left: 33%;
+	width: 26%;
+	height: 6%;
+
 }

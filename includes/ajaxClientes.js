@@ -8,7 +8,7 @@ $(function(){
 		$('#resultados').html('<h3 align="center">Buscando...</h3>');
 		$.ajax({
 			type: 'POST',
-			url: 'buscador.php',
+			url: 'buscadorClientes.php',
 			data: ('search='+envio),
 			success: function(resp){
 				if(resp!=""){

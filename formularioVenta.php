@@ -13,6 +13,10 @@ require_once("buscarHoras.php");
 	$sql = "SELECT * FROM Persona where idPersona='".$_SESSION['empleado']."'";
 	$res = mysql_query($sql,$conexion) or die(mysql_error());
 	$reg = mysql_fetch_array($res) or die(mysql_error());
+	$idCliente = $_GET['idPersona'];
+	$sql2 = "SELECT * FROM Persona where idPersona='$idCliente'";
+	$res2 = mysql_query($sql2,$conexion) or die(mysql_error());
+	$reg2 = mysql_fetch_array($res2) or die(mysql_error());
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +34,7 @@ require_once("buscarHoras.php");
 		    nuevaFila = document.getElementById("tablaCompra").insertRow(-1);
 		    nuevaFila.id = posicionCampo;
 		    nuevaCelda = nuevaFila.insertCell(-1);
-		    nuevaCelda.innerHTML = "<td><input type='text' size='15' name='cantidad[" + posicionCampo + "]'></td>";
+		    nuevaCelda.innerHTML = "<td><input type='text' size='15' name='cantidad[" + posicionCampo + "]' value='1'></td>";
 		    if(opc == 1){
 		    	nuevaCelda = nuevaFila.insertCell(-1);
 		    	nuevaCelda.innerHTML = "<td><select name='opcion[" + posicionCampo + "]' placeholder='Articulo'>"+
@@ -81,7 +85,8 @@ require_once("buscarHoras.php");
 </head>
 <body>
 	<div class="container">
-	Cliente:<br>
+
+	Cliente: <?php echo $reg2['nombresPersona']." ".$reg2['aPaterno']." ".$reg2['aMaterno']."<br/>" ;?>
 	Atendió:<?php echo "  ".$reg['nombresPersona']." ".$reg['aPaterno']." ".$reg['aMaterno']."<br>"; ?>
 	Fecha:<?php echo " ".date('d-m-y'); ?><br>
 		<table id="tablaCompra" >

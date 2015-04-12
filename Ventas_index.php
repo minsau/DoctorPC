@@ -17,6 +17,7 @@ require_once("includes/header.php");
 	<title>Ventas</title>
 	<link rel="stylesheet" type="text/css" href="includes/style.css">	
 	<script type="text/javascript" src="includes/jquery.js"></script>
+	<script type="text/javascript" src="includes/ajaxClientes.js"></script>
 	
 </head>
 <body>
@@ -26,14 +27,14 @@ require_once("includes/header.php");
 			<div class="form center">
 			<h1>Buscar Cliente </h1>
 				<form action="" method="post" name="buscador_form" id="buscador_form">
-					<input type="search" name="buscar">
+					<input type="search" name="buscar" id="search">
 				</form>
+			
+			<div id="resultados">
 			</div>
-			<div id="resultados"></div>
-			<div class="footer center">
-				Copirigth :D
+				
 			</div>
-		</div>
+			</div>
 		
 	
 </body>

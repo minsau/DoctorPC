@@ -8,7 +8,13 @@ if(isset($_POST['search'])){
 }else{
 	 $search = '';
 }
-$consulta = "SELECT * FROM Articulo WHERE claveArticulo LIKE '%$search%' ";
+$consulta = "SELECT * FROM persona,cliente WHERE
+			 (nombresPersona LIKE '%$search%'
+			 OR aPaterno LIKE '%$search%'
+			 OR aMaterno LIKE '%$search%'
+			 OR correo LIKE '%$search%'
+			 OR telefono LIKE '%$search%') 
+			 AND (persona.idPersona = cliente.Persona_idPersona)";
 $resultado = mysql_query($consulta,$conexion) or die(mysql_error());
 //$resultado = mysql_query($conexion,$consulta);
 $fila = mysql_fetch_array($resultado);
@@ -19,31 +25,25 @@ $total = mysql_num_rows($resultado);
 <div align="center">
 
 
-	<table>
-		<tr>
-			<td>Nombre</td>
-			<td>Apellido Parteno</td>
-			<td>Apellido Materno</td>
-		</tr>
+	<table border="1">
+		
 
 	<?php do { ?>
 	
 		<tr>
+			<td>
+				<?php echo $fila['idPersona']; ?>
+			</td>
+			<td>
+				<?php echo $fila['nombresPersona']." ".$fila['aPaterno']." ".$fila['aMaterno']; ?>
+			</td>
+			<td>
+				<?php echo $fila['correo']; ?>
+			</td>
+			<td>
+				<a href="formularioVenta.php?idPersona=<?php echo $fila['idPersona']; ?>" > Ir </a>
+			</td>
 			
-			<input type="hidden" name="id" value="<?php echo $fila['idArticulo']; ?>" >
-			<input type="hidden" name="tipo" value="articulo" >
-			<td>
-				<?php echo $fila['idArticulo']; ?>
-			</td>
-			<td>
-				<?php echo $fila['descripcion']; ?>
-			</td>
-			<td>
-				<?php echo $fila['precio']; ?>
-			</td>
-			<td>
-				<button onclick="agregarUsuario(1,<?php echo $fila['precio'];?> )"> Agregar Servicio</button>
-			</td>		
 		</tr>
 	
 
