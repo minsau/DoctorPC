@@ -8,7 +8,7 @@ if(isset($_POST['search'])){
 }else{
 	 $search = '';
 }
-$consulta = "SELECT * FROM Articulo WHERE claveArticulo LIKE '%$search%' ";
+$consulta = "SELECT * FROM servicio WHERE claveServicio LIKE '%$search%' ";
 $resultado = mysql_query($consulta,$conexion) or die(mysql_error());
 //$resultado = mysql_query($conexion,$consulta);
 $fila = mysql_fetch_array($resultado);
@@ -21,28 +21,30 @@ $total = mysql_num_rows($resultado);
 
 	<table>
 		<tr>
-			<td>Nombre</td>
-			<td>Apellido Parteno</td>
-			<td>Apellido Materno</td>
+			<td>Id Servicio</td>
+			<td>Clave Servicio</td>
+			<td>Precio</td>
+			<td></td>
 		</tr>
 
 	<?php do { ?>
 	
 		<tr>
 			
-			<input type="hidden" name="id" value="<?php echo $fila['idArticulo']; ?>" >
-			<input type="hidden" name="tipo" value="articulo" >
-			<td>
-				<?php echo $fila['idArticulo']; ?>
+			
+			<td class="center">
+				<?php echo $fila['idServicio']; ?>
 			</td>
 			<td>
-				<?php echo $fila['descripcion']; ?>
+				<?php echo $fila['claveServicio']; ?>
 			</td>
 			<td>
 				<?php echo $fila['precio']; ?>
 			</td>
 			<td>
-				<button onclick="agregarUsuario(1,<?php echo $fila['precio'];?> )"> Agregar Servicio</button>
+			
+				<button onclick="agregarServicio(<?php echo $fila['idServicio']?>,'<?php echo $fila['claveServicio']?>',<?php echo $fila['precio']?>)"> Agregar Servicio </button>
+			
 			</td>		
 		</tr>
 	

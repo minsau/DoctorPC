@@ -30,49 +30,26 @@ require_once("buscarHoras.php");
 	<script type="text/javascript" src="includes/script.js"></script>
 	<script type="text/javascript">
 		var posicionCampo = 1;
-		function agregarUsuario(opc,precio) {
+		function agregarServicio(id, descripcion, precio) {
 		    nuevaFila = document.getElementById("tablaCompra").insertRow(-1);
 		    nuevaFila.id = posicionCampo;
 		    nuevaCelda = nuevaFila.insertCell(-1);
+		    nuevaCelda.innerHTML = "<td><input type='hidden' name='idServicio[" + posicionCampo + "]' value='" +id+"'></td>";
+		    nuevaCelda = nuevaFila.insertCell(-1);
 		    nuevaCelda.innerHTML = "<td><input type='text' size='15' name='cantidad[" + posicionCampo + "]' value='1'></td>";
-		    if(opc == 1){
-		    	nuevaCelda = nuevaFila.insertCell(-1);
-		    	nuevaCelda.innerHTML = "<td><select name='opcion[" + posicionCampo + "]' placeholder='Articulo'>"+
-		    	<?php 
-		    		$sqlArti = "SELECT * FROM articulo";
-		    		$resArti = mysql_query($sqlArti,$conexion);
-		    		while($regArti = mysql_fetch_array($resArti)){
-		    	?>
-		    	"<option><?php echo $regArti['claveArticulo'];?></option>"+
-
-		    	<?php
-		    		}
-		    	?>
-		    	"</select></td>";
-			}else{
-		    	nuevaCelda = nuevaFila.insertCell(-1);
-		    	nuevaCelda.innerHTML = "<td><select  name='opcion[" + posicionCampo + "]' placeholder='Servicio'>"+ 
-		    	<?php 
-		    		$sqlSer = "SELECT * FROM servicio";
-		    		$resSer = mysql_query($sqlSer,$conexion);
-		    		while($regSer = mysql_fetch_array($resSer)){
-		    	?>
-		    	"<option><?php echo $regSer['claveServicio'];?></option>"+
-
-		    	<?php
-		    		}
-		    	?>
-		    	"</select></td>";
-		   	}
+		    nuevaCelda = nuevaFila.insertCell(-1);
+		    nuevaCelda.innerHTML = "<td><input type='text' name='servicio[" + posicionCampo + "]' placeholder='Servicio' value='" + descripcion + "'></td>";
 		   	nuevaCelda = nuevaFila.insertCell(-1);
-		    nuevaCelda.innerHTML = "<td><input type='text' size='10' name='descripcion[" + posicionCampo + "]'></td>";
+		    nuevaCelda.innerHTML = "<td><textarea name='descripcion[" + posicionCampo + "]' cols='10' rows='5' > </textarea></td>";
 		    nuevaCelda = nuevaFila.insertCell(-1);
 		    nuevaCelda.innerHTML = "<td><input type='text' size='10' name='precio[" + posicionCampo + "]' value = '" +precio+"'></td>";
 		    nuevaCelda = nuevaFila.insertCell(-1);
-		    nuevaCelda.innerHTML = "<td><input type='button' value='Eliminar' onclick='eliminarUsuario(this)'></td>";
+		    nuevaCelda.innerHTML = "<td><input type='text' size='10' name='anticipo[" + posicionCampo + "]' value='0' ></td>";
+		    nuevaCelda = nuevaFila.insertCell(-1);
+		    nuevaCelda.innerHTML = "<td><input type='button' value='Eliminar' onclick='eliminarServicio(this)'></td>";
 		    posicionCampo++;
 		}
-		function eliminarUsuario(obj) {
+		function eliminarServicio(obj) {
 		    var oTr = obj;
 		    while(oTr.nodeName.toLowerCase() != 'tr') {
 		        oTr=oTr.parentNode;
@@ -89,6 +66,10 @@ require_once("buscarHoras.php");
 	Cliente: <?php echo $reg2['nombresPersona']." ".$reg2['aPaterno']." ".$reg2['aMaterno']."<br/>" ;?>
 	Atendió:<?php echo "  ".$reg['nombresPersona']." ".$reg['aPaterno']." ".$reg['aMaterno']."<br>"; ?>
 	Fecha:<?php echo " ".date('d-m-y'); ?><br>
+		<form action="accionVenta.php" method="post"> 
+		<input type="hidden" name = "cliente"value="<?php echo $idCliente ?>">
+		<input type="hidden" name = "vendedor" value="<?php echo $_SESSION['empleado']?>">
+		
 		<table id="tablaCompra" >
 			<tr>
 				<td>
@@ -104,10 +85,14 @@ require_once("buscarHoras.php");
 				<td>
 					Precio
 				</td>
+				<td>
+					Anticipo
+				</td>
 			</tr>
 		</table>
-		<button onclick="openVentana()"> Agregar Articulo</button>
-		<button onclick="agregarUsuario(2)"> Agregar Servicio</button>
+		<button type="button" onclick="openVentana()"> Agregar Servicio</button>
+		<input type="submit" value="Vender">
+		</form>
 	</div>
 </body>
 </html>
