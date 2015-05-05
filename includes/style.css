@@ -1,12 +1,21 @@
+* {
+		list-style: none;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+}
 body{
 	color: #666;
 	background-color: #F0F0F0;
+	z-index: -1;
+
 }
 .container{
 	top: 8%;
-	width: 800px;
+	width: 90%;
+	min-width: 90%;
 	min-height: 600px;
-	left: 20%;
+	left: 3.5%;
 	padding: 20px;
 	background-color: #FFF;
 	border: solid 1px #CCC;
@@ -34,7 +43,7 @@ body{
 	top: 0;
 	left: 0;
 	display: none;
-	z-index:1;
+	
 }
 
 .form{
@@ -46,7 +55,7 @@ body{
 	top:10%;
 	left: 10%;
 	position: absolute;
-	z-index:1;
+	
 }
 
 #form-NuevoCliente{

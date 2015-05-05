@@ -44,48 +44,56 @@ $nombreEmpleado = utf8_decode($nombreEmpleado);
 
 $fecha = "Fecha: ".date('d-m-y');
 
-
-   /* require_once("includes/src/Cezpdf.php");
-    $pdf = new Cezpdf('a4');
-    $pdf->selectFont('fonts/Times-Roman.afm');
-    $datacreator = array (
-                        'Title'=>'Nota de Venta',
-                        'Author'=>'DoctorPC',
-                        'Subject'=>'Venta',
-                        'Creator'=>'minsau',
-                        'Producer'=>'minsau2@gmail.com'
-                        );
-    $pdf->addInfo($datacreator);
-    */ 
    for($j = 1; $j<=count($_POST['servicio']);$j++){
    		$data[] = array('servicio'=>$_POST['servicio']{$j},'descripcion'=>$_POST['descripcion']{$j},'precio'=>$_POST['precio']{$j},'anticipo'=>$_POST['anticipo']{$j});
    }
   
+   
+    $titles[] = array('servicio'=>'Servicio','descripcion'=>'Descripcion','precio'=>'Precio','anticipo'=>'Anticipo');
      
-    $titles = array('servicio'=>'<b>Servicio</b>','descripcion'=>'<b>Descripcion</b>','precio'=>'<b>Precio</b>','anticipo'=>'Anticipo');
-     
-    /*$pdf->ezText("<b>Nota de venta</b>\n",16);
-    $pdf->ezText("Listado de Meses\n",12);
-    $pdf->ezText("<b>Fecha:</b> ".date("d/m/Y"),10);
-    $pdf->ezText("<b>Hora:</b> ".date("H:i:s")."\n\n",10);
-    $pdf->ezTable($data,$titles,'',$options );
-    $pdf->ezText("\n\n\n",10);
-    
-    $pdf->ezStream();
+	$pdf=new FPDF();
+ 	$pdf->AddPage();
+ 	$pdf->SetFont('Arial','B',16);
+ 	$pdf->SetXY(150,5);
+ 	$pdf->Cell(30,5,$fecha); 
+ 	$pdf->SetXY(10,5);
+ 	$pdf->Cell(30,5,$nombreCliente); 
+ 	$pdf->SetXY(10,10);
+ 	$pdf->Cell(30,5,$nombreEmpleado); 
+	$x=30;
+	$y=30;
+
+	    foreach($titles as $elemento){
+		    foreach($elemento as $llave => $valor){       
+		    $pdf->SetXY($x,$y);  
+			$pdf->Cell(10,5,$valor); 
+		    $x+=40;
+		   		 }
+	    $y+=10;
+	    $x=30;
+		} 
+	$pdf->SetFont('Arial','',16);
+	    foreach($data as $item){
+		    foreach($item as $key => $value){       
+		    $pdf->SetXY($x,$y);  
+			$pdf->Cell(10,5,$value); 
+		    $x+=40;
+		   		 }
+	    $y+=10;
+	    $x=30;
+		} 
+		$y +=10;
+	$pdf->SetXY(150,$y);
+ 	$pdf->Cell(30,5,'Total: '.$costoTotal);  
+ 	$y+=10; 
+	$pdf->SetXY(150,$y);
+ 	$pdf->Cell(30,5,'Anticipo: '.$anticipoTotal);
+ 	$y+=10;
+ 	$restante = $costoTotal - $anticipoTotal;
+ 	$pdf->SetXY(150,$y);
+ 	$pdf->Cell(30,5,'Resta: '.$restante);  
 	
-
-	$pdf = new PDF();
- 
-$pdf->AddPage();
-$x=10;
-$y=20;
-$pdf->SetXY($x,$y);
-$pdf->Output(); 
-*/
-
-
-
-
+	$pdf->Output(); 
 
 ?>
 
