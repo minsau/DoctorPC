@@ -117,3 +117,7 @@ body{
 .precio{
 	width: 150px;
 }
+
+.link-to tbody tr:hover{
+	cursor: pointer;
+}

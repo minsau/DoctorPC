@@ -34,11 +34,7 @@ require_once("includes/functions.php");
 <div id="header">
 		<ul class="nav">
 			<li><a href="index.php">Inicio</a></li>
-			<li><a href="verClientes.php">Clientes</a>
-				<ul>
-					<li><a href="formularioNuevoCliente.php">Nuevo Cliente</a></li>	
-				</ul>
-			</li>
+			
 			<li><a href="Ventas_index.php">Ventas</a>
 				<ul>
 					<li><a href="Ventas_index.php">Venta</a></li>
@@ -51,11 +47,25 @@ require_once("includes/functions.php");
 					</li>
 				</ul>
 			</li>
-			<li><a>Articulos</a></li>
+			<li><a href="verClientes.php">Clientes</a>
+				<ul>
+					<li><a href="formularioNuevoCliente.php">Nuevo Cliente</a></li>	
+				</ul>
+			</li>
+			<li><a href="servicios.php">Servicios</a>
+				<ul>
+					<li><a href="servicios.php?ubicacion=1">Nuevo Servicio</a></li>
+				</ul>
+			</li>
+			<li><a href="articulos.php">Articulos</a>
+				<ul>
+					<li><a href="articulos.php?ubicacion=1">Nuevo Articulo</a></li>
+				</ul>
+			</li>
 			<?php
 			if(isset($_SESSION['empleado'])){
 			?>
-			<li><a href="Administrar.php">Administrar</a></li>
+			
 			<li><a href="salir.php">Cerrar Sesion</a></li>
 			<?php
 			}

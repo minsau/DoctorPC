@@ -11,7 +11,7 @@
 			where
 			servicio_has_venta.Venta_idVenta = venta.idVenta and 
 			servicio_has_venta.Servicio_idServicio = servicio.idServicio 
-			order by servicio_has_venta.idServicio";
+			group by venta.idVenta";
 
 	$res = mysql_query($sql,$conexion) or die(mysql_error());	
 ?>
@@ -23,13 +23,13 @@
 </head>
 <body>
 <div class="container">
-<table class="tabla">
+<table class="tabla link-to">
 	<thead>
 		
 		<td>Id</td>
 		<td>Vendio</td>
 		<td>Cliente</td>
-		<td>Clave</td>
+		
 		<td>Precio </td>
 		
 		<td>Fecha de Venta </td>
@@ -63,7 +63,7 @@
 			<td><?php echo $reg['idVenta'] ?></td>
 			<td class="nombre"><?php echo $regEmpleado['nombresPersona']." ".$regEmpleado['aPaterno']." ".$regEmpleado['aMaterno']; ?></td>
 			<td class="nombre"><?php echo $regCliente['nombresPersona']." ".$regCliente['aPaterno']." ".$regCliente['aMaterno']; ?></td>
-			<td><?php echo $reg['claveServicio'] ?></td>
+			
 			<td class="precio"><?php echo formatPesos($reg['precio']); ?></td>
 			
 			<td><?php echo formatDate($reg['fecha']); ?></td>
