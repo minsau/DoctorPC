@@ -1,8 +1,8 @@
 
 <?php
-require_once("includes/connection.php");
+require_once("includes/header.php");
 require_once("includes/fpdf/fpdf.php");
-require_once("includes/functions.php");
+
 $idEmpleado = $_POST['vendedor'];
 $idCliente = $_POST['cliente'];
 
@@ -34,21 +34,22 @@ $res = mysql_query($sql,$conexion) or die(mysql_error());
 $reg = mysql_fetch_array($res) or die(mysql_error());
 
 $nombreCliente = "Cliente: ".$reg['nombresPersona']." ".$reg['aPaterno']." ".$reg['aMaterno'];
-$nombreCliente = utf8_decode($nombreCliente);
+$nombreCliente = $nombreCliente;
 
 $sql = "SELECT * FROM Persona  where idPersona = $idEmpleado";
 $res = mysql_query($sql,$conexion) or die(mysql_error());
 $reg = mysql_fetch_array($res) or die(mysql_error());
 
 $nombreEmpleado = "Atendio: ".$reg['nombresPersona']." ".$reg['aPaterno']." ".$reg['aMaterno'];
-$nombreEmpleado = utf8_decode($nombreEmpleado);
+$nombreEmpleado = $nombreEmpleado;
 
 $fecha = "Fecha: ".formatDate(date('Y-m-d'));
 
    for($j = 1; $j<=count($_POST['servicio']);$j++){
    		$data[] = array('servicio'=>$_POST['servicio']{$j},'descripcion'=>$_POST['descripcion']{$j},'precio'=>formatPesos($_POST['precio']{$j}),'anticipo'=>formatPesos($_POST['anticipo']{$j}));
    }
-    
+  
+   
     $titles[] = array('servicio'=>'Servicio','descripcion'=>'Descripcion','precio'=>'Precio','anticipo'=>'Anticipo');
      
 ?>
@@ -56,9 +57,65 @@ $fecha = "Fecha: ".formatDate(date('Y-m-d'));
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Imprimir Nota</title>
+	<title>Nota de venta</title>
+	<script type="text/javascript">
+function imprSelec(muestra){
+	var ficha=document.getElementById(muestra);
+	var ventimp=window.open('','popimpr');
+	ventimp.document.write(ficha.innerHTML);
+	ventimp.document.close();
+	ventimp.print();
+}
+</script>
 </head>
 <body>
+<div class="container">
+<div id="nota">
+<?php
+	echo $fecha."			<br>".$nombreEmpleado."<br>".$nombreCliente;
+?>
+<table border = "1" class="tabla center">
 
+	<thead>
+		<tr>
+			<td>
+				Servicio
+			</td>
+			<td class='descripcion'>
+				Descripcion
+			</td>
+			<td>
+				Precio
+			</td>
+
+			<td>
+				Anticipo
+			</td>
+		</tr>
+	</thead>
+	<?php
+	    foreach($data as $item){
+	?>
+	<tbody>
+		<tr>
+	<?php
+		    foreach($item as $key => $value){       
+					echo "<td >".$value."</td>";
+		   		 }
+	?>
+
+	</tr>
+	</tbody>
+	<?php
+		} 
+	?>
+	</table>
+
+	<?php
+		echo "Total: ".formatPesos($costoTotal)."<br>Anticipo: ".formatPesos($anticipoTotal)."<br>Restante: ".formatPesos(($costoTotal - $anticipoTotal))."<br>";
+	?>
+	</div>
+<a href="javascript:imprSelec('nota')">Imprimir Tabla</a>
+</div>
 </body>
 </html>
