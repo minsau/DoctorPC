@@ -29,44 +29,25 @@ body{
 	font-size: 14px;
 }
 #resultados{
+	margin-top: 50px;
 	z-index: 100;
 	min-height: 290px;
+	font-size: 25px;
 }
 
 
 .modal{
 	width: 100%;
 	height: 100%;
-	color: #FFF;
+	color: #000;
 	position: fixed;
 	background-image: url(../img/bg-modal.png);
 	top: 0;
 	left: 0;
 	display: none;
+	z-index: 10000;
 	
 }
-
-.form{
-	width: 80%;
-	height: 80%;
-	padding: 25px;
-	background-color: #FFF;
-	color: #666;
-	top:10%;
-	left: 10%;
-	position: absolute;
-	
-}
-
-#form-NuevoCliente{
-	top: 30%;
-	left: 30%;
-	background-color:#FFF ;
-	padding: 25px;
-	color: #666;
-	position: absolute;
-}
-
 
 .cerrar{	
 	font-weight: 900;
@@ -89,3 +70,50 @@ body{
 	height: 6%;
 }
 
+.tabla{
+	margin: auto;
+}
+
+.tabla thead{
+	color:#000;
+	font-size: 22px;
+
+}
+
+.tabla tbody{
+	color:#000F00;
+}
+
+.tabla thead tr td{
+	width: 150px;
+	height: 50px;
+}
+
+.direccion{
+	width: 250px;
+}
+.nombre{
+	width: 250px;
+}
+
+.correo{
+	width: 200px;
+}
+.tabla tbody tr:hover td{
+	background-color: #F0F0F0;
+}
+
+.tabla tbody tr td{
+	height: 30px;
+}
+
+.busqueda {
+	margin:auto;
+}
+
+ .nombresBusqueda{
+	width: 350px;
+}
+.precio{
+	width: 150px;
+}

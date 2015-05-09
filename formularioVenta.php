@@ -36,15 +36,15 @@ require_once("buscarHoras.php");
 		    nuevaCelda = nuevaFila.insertCell(-1);
 		    nuevaCelda.innerHTML = "<td><input type='hidden' name='idServicio[" + posicionCampo + "]' value='" +id+"'></td>";
 		    nuevaCelda = nuevaFila.insertCell(-1);
-		    nuevaCelda.innerHTML = "<td><input type='text' size='15' name='cantidad[" + posicionCampo + "]' value='1'></td>";
+		    nuevaCelda.innerHTML = "<td><input type='text' size='15' name='cantidad[" + posicionCampo + "]' value='1'  class='cantidad'></td>";
 		    nuevaCelda = nuevaFila.insertCell(-1);
-		    nuevaCelda.innerHTML = "<td><input type='text' name='servicio[" + posicionCampo + "]' placeholder='Servicio' value='" + descripcion + "'></td>";
+		    nuevaCelda.innerHTML = "<td><input type='text' name='servicio[" + posicionCampo + "]' placeholder='Servicio' class= 'producto' value='" + descripcion + "'></td>";
 		   	nuevaCelda = nuevaFila.insertCell(-1);
-		    nuevaCelda.innerHTML = "<td><textarea name='descripcion[" + posicionCampo + "]' cols='10' rows='5' > </textarea></td>";
+		    nuevaCelda.innerHTML = "<td><textarea name='descripcion[" + posicionCampo + "]' class='descripcion' cols='10' rows='5' required> </textarea></td>";
 		    nuevaCelda = nuevaFila.insertCell(-1);
-		    nuevaCelda.innerHTML = "<td><input type='text' size='10' name='precio[" + posicionCampo + "]' value = '" +precio+"'></td>";
+		    nuevaCelda.innerHTML = "<td><input type='text' size='10' name='precio[" + posicionCampo + "]' class = 'precio' value = '" +precio+"'></td>";
 		    nuevaCelda = nuevaFila.insertCell(-1);
-		    nuevaCelda.innerHTML = "<td><input type='text' size='10' name='anticipo[" + posicionCampo + "]' value='0' ></td>";
+		    nuevaCelda.innerHTML = "<td><input type='text' size='10' name='anticipo[" + posicionCampo + "]' class = 'precio' value='0' ></td>";
 		    nuevaCelda = nuevaFila.insertCell(-1);
 		    nuevaCelda.innerHTML = "<td><input type='button' value='Eliminar' onclick='eliminarServicio(this)'></td>";
 		    posicionCampo++;
@@ -65,33 +65,36 @@ require_once("buscarHoras.php");
 
 	Cliente: <?php echo $reg2['nombresPersona']." ".$reg2['aPaterno']." ".$reg2['aMaterno']."<br/>" ;?>
 	Atendió:<?php echo "  ".$reg['nombresPersona']." ".$reg['aPaterno']." ".$reg['aMaterno']."<br>"; ?>
-	Fecha:<?php echo " ".date('d-m-y'); ?><br>
+	Fecha:<?php echo " ".formatDate(date('Y-m-d')); ?><br>
 		<form action="accionVenta.php" method="post"> 
 		<input type="hidden" name = "cliente"value="<?php echo $idCliente ?>">
 		<input type="hidden" name = "vendedor" value="<?php echo $_SESSION['empleado']?>">
 		
-		<table id="tablaCompra" >
-			<tr>
-				<td>
+		<table id="tablaCompra" class="center tabla" border="0">
+			<thead><tr>
+				<td></td>
+				<td class="cantidad">
 					Cantidad
 				</td>
 				
-				<td>
+				<td class="producto">
 					Producto	
 				</td>
-				<td>
+				<td class="descripcion">
 					Descripcion
 				</td>
-				<td>
+				<td class="precio">
 					Precio
 				</td>
-				<td>
+				<td class="precio">
 					Anticipo
 				</td>
-			</tr>
+			</tr></thead>
 		</table>
+		<div id="venta">
 		<button type="button" onclick="openVentana()"> Agregar Servicio</button>
 		<input type="submit" value="Vender">
+		</div>
 		</form>
 	</div>
 </body>

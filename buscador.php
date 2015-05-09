@@ -19,7 +19,7 @@ $total = mysql_num_rows($resultado);
 <div align="center">
 
 
-	<table>
+	<table class="tabla busqueda">
 		<tr>
 			<td>Id Servicio</td>
 			<td>Clave Servicio</td>

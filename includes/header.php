@@ -16,31 +16,33 @@ if($status == PHP_SESSION_ACTIVE)
    
 }
 require_once("includes/connection.php");
+require_once("includes/functions.php");
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>	
+	
 	
 	<link rel="stylesheet" type="text/css" href="includes/styleHeader.css">
-	<script type="text/javascript" src="includes/jquery.js"></script>
-	<script type="text/javascript" src="includes/ajax.js"></script>
+	<link rel="stylesheet" type="text/css" href="includes/styleForms.css">
+	<link rel="stylesheet" type="text/css" href="includes/style.css">
+	<script type="text/javascript" src="includes/jquery.js"></script>	
 	<script type="text/javascript" src="includes/script.js"></script>
 </head>
 <body>
 <div id="header">
 		<ul class="nav">
 			<li><a href="index.php">Inicio</a></li>
-			<li><a href="formularioNuevoCliente.php">Clientes</a>
+			<li><a href="verClientes.php">Clientes</a>
 				<ul>
-					<li><a href="">Ver clientes</a></li>	
+					<li><a href="formularioNuevoCliente.php">Nuevo Cliente</a></li>	
 				</ul>
 			</li>
 			<li><a href="Ventas_index.php">Ventas</a>
 				<ul>
-					<li><a href="">Venta</a></li>
-					<li><a href="">Ver Ventas</a>
+					<li><a href="Ventas_index.php">Venta</a></li>
+					<li><a href="verVentas.php">Ver Ventas</a>
 					<ul>
 						<li><a href="">Lista</a></li>
 						<li><a href="">Grafica</a></li>
@@ -50,14 +52,23 @@ require_once("includes/connection.php");
 				</ul>
 			</li>
 			<li><a>Articulos</a></li>
+			<?php
+			if(isset($_SESSION['empleado'])){
+			?>
+			<li><a href="Administrar.php">Administrar</a></li>
+			<li><a href="salir.php">Cerrar Sesion</a></li>
+			<?php
+			}
+			?>
+
 		</ul>
 
 		<?php 
 		if(!isset($_SESSION['empleado'])){
 		?>
-		<div id="formulario">
+		<div id="formLogin">
 		<form action="logueo.php" method="post" >
-		Correo: <input type="e-mail" name="email" placeholder="Ingresa tu correo" required>
+		Correo: <input type="email" name="email" placeholder="Ingresa tu correo" required>
 		Contraseña: <input type="password" name="pass" placeholder="Ingresa tu Contraseña">
 		<input type="submit" name="" value="Entrar">
 		</form>

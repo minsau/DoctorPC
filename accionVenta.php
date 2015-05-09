@@ -2,6 +2,7 @@
 <?php
 require_once("includes/connection.php");
 require_once("includes/fpdf/fpdf.php");
+require_once("includes/functions.php");
 $idEmpleado = $_POST['vendedor'];
 $idCliente = $_POST['cliente'];
 
@@ -42,10 +43,10 @@ $reg = mysql_fetch_array($res) or die(mysql_error());
 $nombreEmpleado = "Atendio: ".$reg['nombresPersona']." ".$reg['aPaterno']." ".$reg['aMaterno'];
 $nombreEmpleado = utf8_decode($nombreEmpleado);
 
-$fecha = "Fecha: ".date('d-m-y');
+$fecha = "Fecha: ".formatDate(date('Y-m-d'));
 
    for($j = 1; $j<=count($_POST['servicio']);$j++){
-   		$data[] = array('servicio'=>$_POST['servicio']{$j},'descripcion'=>$_POST['descripcion']{$j},'precio'=>$_POST['precio']{$j},'anticipo'=>$_POST['anticipo']{$j});
+   		$data[] = array('servicio'=>$_POST['servicio']{$j},'descripcion'=>$_POST['descripcion']{$j},'precio'=>formatPesos($_POST['precio']{$j}),'anticipo'=>formatPesos($_POST['anticipo']{$j}));
    }
   
    
@@ -54,44 +55,54 @@ $fecha = "Fecha: ".date('d-m-y');
 	$pdf=new FPDF();
  	$pdf->AddPage();
  	$pdf->SetFont('Arial','B',16);
- 	$pdf->SetXY(150,5);
+ 	$pdf->SetXY(130,5);
  	$pdf->Cell(30,5,$fecha); 
  	$pdf->SetXY(10,5);
  	$pdf->Cell(30,5,$nombreCliente); 
  	$pdf->SetXY(10,10);
  	$pdf->Cell(30,5,$nombreEmpleado); 
-	$x=30;
+	$x=20;
 	$y=30;
 
 	    foreach($titles as $elemento){
 		    foreach($elemento as $llave => $valor){       
 		    $pdf->SetXY($x,$y);  
 			$pdf->Cell(10,5,$valor); 
-		    $x+=40;
+		    $x+=50;
 		   		 }
 	    $y+=10;
-	    $x=30;
+	    $x=20;
 		} 
 	$pdf->SetFont('Arial','',16);
+
 	    foreach($data as $item){
+	    	$i=1;
 		    foreach($item as $key => $value){       
-		    $pdf->SetXY($x,$y);  
-			$pdf->Cell(10,5,$value); 
-		    $x+=40;
+		    if($i==2){
+				    $pdf->SetXY($x,$y);  
+					$pdf->MultiCell(70,5,$value); 
+				    $x+=70;
+			} else {
+					$pdf->SetXY($x,$y);  
+					$pdf->MultiCell(30,5,$value); 
+				    $x+=30;
+			}
+
+		    $i++;
 		   		 }
-	    $y+=10;
-	    $x=30;
+	    $y+=30;
+	    $x=20;
 		} 
 		$y +=10;
 	$pdf->SetXY(150,$y);
- 	$pdf->Cell(30,5,'Total: '.$costoTotal);  
+ 	$pdf->Cell(30,5,'Total: '.formatPesos($costoTotal));  
  	$y+=10; 
 	$pdf->SetXY(150,$y);
- 	$pdf->Cell(30,5,'Anticipo: '.$anticipoTotal);
+ 	$pdf->Cell(30,5,'Anticipo: '.formatPesos($anticipoTotal));
  	$y+=10;
  	$restante = $costoTotal - $anticipoTotal;
  	$pdf->SetXY(150,$y);
- 	$pdf->Cell(30,5,'Resta: '.$restante);  
+ 	$pdf->Cell(30,5,'Resta: '.formatPesos($restante));  
 	
 	$pdf->Output(); 
 

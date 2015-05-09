@@ -25,7 +25,7 @@ $total = mysql_num_rows($resultado);
 <div align="center">
 
 
-	<table border="1">
+	<table border="0" class="tabla busqueda">
 		
 
 	<?php do { ?>
@@ -34,10 +34,10 @@ $total = mysql_num_rows($resultado);
 			<td>
 				<?php echo $fila['idPersona']; ?>
 			</td>
-			<td>
+			<td class="nombresBusqueda">
 				<?php echo $fila['nombresPersona']." ".$fila['aPaterno']." ".$fila['aMaterno']; ?>
 			</td>
-			<td>
+			<td class="correo ">
 				<?php echo $fila['correo']; ?>
 			</td>
 			<td>

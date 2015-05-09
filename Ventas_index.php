@@ -24,7 +24,7 @@ require_once("includes/header.php");
 	
 		
 		<div class="container">
-			<div class="form center">
+			<div id="formBuscar" class="center">
 			<h1>Buscar Cliente </h1>
 				<form action="" method="post" name="buscador_form" id="buscador_form">
 					<input type="search" name="buscar" id="search">

@@ -9,7 +9,7 @@ require_once("includes/connection.php");
 </head>
 <body>
 	<div class="container">
-		<div id="form-NuevoCliente">
+		<div id="form-NuevoCliente" class="center">
 			<form action="#" method="post" formvalidate>
 				<table>
 					<tr>
@@ -40,7 +40,7 @@ require_once("includes/connection.php");
 				</table>
 			</form>
 		</div>
-		<div id="datos" >
+		
 			<?php
 				if($_POST){
 					$nombres = "";
@@ -74,7 +74,7 @@ require_once("includes/connection.php");
 					$res = mysql_query($sql,$conexion) or die(mysql_error());
 				}
 			?>
-		</div>
+		
 	</div>	
 </body>
 </html>
