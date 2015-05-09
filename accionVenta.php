@@ -16,7 +16,7 @@ for($i=1;$i <= count($_POST['precio']);$i++){
 
 }
 
-$sql = "insert into venta values (null,".$idEmpleado.",".$idCliente.",".$costoTotal.",now(),".$anticipoTotal.")";
+/*$sql = "insert into venta values (null,".$idEmpleado.",".$idCliente.",".$costoTotal.",now(),".$anticipoTotal.")";
 $res = mysql_query($sql,$conexion) or die(mysql_error());
 
 $sql = "SELECT * FROM venta order by idVenta desc limit 0,1";
@@ -28,7 +28,7 @@ for($i=1;$i<=count($_POST['servicio']);$i++){
 	$sql = "insert into servicio_has_venta values (null,".$_POST['idServicio']{$i}.",".$idVenta[0].",'".$_POST['descripcion']{$i}."',".$_POST['anticipo']{$i}.",0)";
 	$res = mysql_query($sql,$conexion) or die(mysql_error());
 }
-
+*/
 $sql = "SELECT * FROM Persona  where idPersona = $idCliente";
 $res = mysql_query($sql,$conexion) or die(mysql_error());
 $reg = mysql_fetch_array($res) or die(mysql_error());
@@ -48,63 +48,17 @@ $fecha = "Fecha: ".formatDate(date('Y-m-d'));
    for($j = 1; $j<=count($_POST['servicio']);$j++){
    		$data[] = array('servicio'=>$_POST['servicio']{$j},'descripcion'=>$_POST['descripcion']{$j},'precio'=>formatPesos($_POST['precio']{$j}),'anticipo'=>formatPesos($_POST['anticipo']{$j}));
    }
-  
-   
+    
     $titles[] = array('servicio'=>'Servicio','descripcion'=>'Descripcion','precio'=>'Precio','anticipo'=>'Anticipo');
      
-	$pdf=new FPDF();
- 	$pdf->AddPage();
- 	$pdf->SetFont('Arial','B',16);
- 	$pdf->SetXY(130,5);
- 	$pdf->Cell(30,5,$fecha); 
- 	$pdf->SetXY(10,5);
- 	$pdf->Cell(30,5,$nombreCliente); 
- 	$pdf->SetXY(10,10);
- 	$pdf->Cell(30,5,$nombreEmpleado); 
-	$x=20;
-	$y=30;
-
-	    foreach($titles as $elemento){
-		    foreach($elemento as $llave => $valor){       
-		    $pdf->SetXY($x,$y);  
-			$pdf->Cell(10,5,$valor); 
-		    $x+=50;
-		   		 }
-	    $y+=10;
-	    $x=20;
-		} 
-	$pdf->SetFont('Arial','',16);
-
-	    foreach($data as $item){
-	    	$i=1;
-		    foreach($item as $key => $value){       
-		    if($i==2){
-				    $pdf->SetXY($x,$y);  
-					$pdf->MultiCell(70,5,$value); 
-				    $x+=70;
-			} else {
-					$pdf->SetXY($x,$y);  
-					$pdf->MultiCell(30,5,$value); 
-				    $x+=30;
-			}
-
-		    $i++;
-		   		 }
-	    $y+=30;
-	    $x=20;
-		} 
-		$y +=10;
-	$pdf->SetXY(150,$y);
- 	$pdf->Cell(30,5,'Total: '.formatPesos($costoTotal));  
- 	$y+=10; 
-	$pdf->SetXY(150,$y);
- 	$pdf->Cell(30,5,'Anticipo: '.formatPesos($anticipoTotal));
- 	$y+=10;
- 	$restante = $costoTotal - $anticipoTotal;
- 	$pdf->SetXY(150,$y);
- 	$pdf->Cell(30,5,'Resta: '.formatPesos($restante));  
-	
-	$pdf->Output(); 
-
 ?>
 
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Imprimir Nota</title>
+</head>
+<body>
+
+</body>
+</html>
