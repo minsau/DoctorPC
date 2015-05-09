@@ -10,6 +10,7 @@ require_once("includes/header.php");
 </head>
 <body>
 	<div class="container">
+		RAMA IMPRESION	
 	</div>
 </body>
 </html>
