@@ -1,7 +1,7 @@
 <?php
 require_once("includes/connection.php");
 require_once("includes/header.php");
-$sql = "SELECT * FROM persona";
+$sql = "SELECT * FROM Persona";
 $res = mysql_query($sql,$conexion) or die(mysql_error());
 ?>
 

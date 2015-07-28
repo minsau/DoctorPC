@@ -62,15 +62,15 @@ require_once("includes/connection.php");
 					$telefono = $_POST['tel'];
 					$correo = $_POST['email'];
 					$direccion = $_POST['direccion'];
-					$sql = "INSERT INTO persona values (null,'$nombres','$aPaterno','$aMaterno','$direccion','$telefono','$correo')";
+					$sql = "INSERT INTO Persona values (null,'$nombres','$aPaterno','$aMaterno','$direccion','$telefono','$correo')";
 					$res = mysql_query($sql,$conexion) or die(mysql_error());
 					
-					$sql2 = "SELECT idPersona FROM persona order by idPersona desc limit 0,1 ";
+					$sql2 = "SELECT idPersona FROM Persona order by idPersona desc limit 0,1 ";
 					$res2 = mysql_query($sql2,$conexion) or die(mysql_error());
 					$reg2 = mysql_fetch_array($res2);
 					
 					
-					$sql = "INSERT INTO cliente values ('$id',now())";
+					$sql = "INSERT INTO Cliente values ('$id',now())";
 					$res = mysql_query($sql,$conexion) or die(mysql_error());
 				}
 			?>

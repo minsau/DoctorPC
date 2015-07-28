@@ -1,5 +1,5 @@
 
-		 <?php 
+<?php 
  require_once("includes/connection.php");
 
 // $search = '';
@@ -8,13 +8,13 @@ if(isset($_POST['search'])){
 }else{
 	 $search = '';
 }
-$consulta = "SELECT * FROM persona,cliente WHERE
+$consulta = "SELECT * FROM Persona,Cliente WHERE
 			 (nombresPersona LIKE '%$search%'
 			 OR aPaterno LIKE '%$search%'
 			 OR aMaterno LIKE '%$search%'
 			 OR correo LIKE '%$search%'
 			 OR telefono LIKE '%$search%') 
-			 AND (persona.idPersona = cliente.Persona_idPersona)";
+			 AND (Persona.idPersona = Cliente.Persona_idPersona)";
 $resultado = mysql_query($consulta,$conexion) or die(mysql_error());
 //$resultado = mysql_query($conexion,$consulta);
 $fila = mysql_fetch_array($resultado);

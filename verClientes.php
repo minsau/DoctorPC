@@ -1,7 +1,7 @@
 	
 	<?php
 	require_once("includes/header.php");
-	$sql = "SELECT * FROM persona,cliente where persona.idPersona = cliente.Persona_idPersona";
+	$sql = "SELECT * FROM Persona,Cliente where Persona.idPersona = Cliente.Persona_idPersona";
 	$res = mysql_query($sql,$conexion) or die(mysql_error());
 	?>
 

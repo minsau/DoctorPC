@@ -1,17 +1,16 @@
 <?php
 	require_once("includes/header.php");
 	$sql = "SELECT 
-			venta.idVenta,
-			servicio.claveServicio,
-			servicio.precio,
-			venta.costoTotal,
-			venta.fecha,
-			venta.anticipoGeneral
-			FROM servicio_has_venta,venta,servicio 
+			Venta.idVenta,
+			Servicio.claveServicio,
+			Servicio.precio,
+			Venta.costoTotal,
+			Venta.fecha
+			FROM Servicio_has_Venta,Venta,Servicio 
 			where
-			servicio_has_venta.Venta_idVenta = venta.idVenta and 
-			servicio_has_venta.Servicio_idServicio = servicio.idServicio 
-			group by venta.idVenta";
+			Servicio_has_Venta.Venta_idVenta = Venta.idVenta and 
+			Servicio_has_Venta.Servicio_idServicio = Servicio.idServicio 
+			group by Venta.idVenta";
 
 	$res = mysql_query($sql,$conexion) or die(mysql_error());	
 ?>
@@ -39,23 +38,23 @@
 	<?php
 	while ($reg = mysql_fetch_array($res)) {
 		$sqlCliente = "SELECT 
-						persona.nombresPersona,
-						persona.aPaterno,
-						persona.aMaterno
-						FROM persona,venta
+						Persona.nombresPersona,
+						Persona.aPaterno,
+						Persona.aMaterno
+						FROM Persona,Venta
 						where
-						venta.idVenta = '".$reg['idVenta']." ' and 
-						venta.Cliente_Persona_idPersona = persona.idPersona";
+						Venta.idVenta = '".$reg['idVenta']." ' and 
+						Venta.Cliente_Persona_idPersona = Persona.idPersona";
 		$resCliente = mysql_query($sqlCliente,$conexion) or die(mysql_error());
 		$regCliente = mysql_fetch_array($resCliente);
 		$sqlEmpleado = "SELECT 
-						persona.nombresPersona,
-						persona.aPaterno,
-						persona.aMaterno
-						FROM persona,venta
+						Persona.nombresPersona,
+						Persona.aPaterno,
+						Persona.aMaterno
+						FROM Persona,Venta
 						where
-						venta.idVenta = '".$reg['idVenta']." ' and 
-						venta.Empleado_Persona_idPersona = persona.idPersona";
+						Venta.idVenta = '".$reg['idVenta']." ' and 
+						Venta.Empleado_Persona_idPersona = Persona.idPersona";
 		$resEmpleado = mysql_query($sqlEmpleado,$conexion) or die(mysql_error());
 		$regEmpleado = mysql_fetch_array($resEmpleado);	
 	?>	

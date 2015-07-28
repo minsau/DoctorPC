@@ -1,6 +1,6 @@
 <?php
 	require_once("includes/header.php");
-	$sql = "SELECT * FROM articulo";
+	$sql = "SELECT * FROM Articulo";
 	$res = mysql_query($sql,$conexion);
 ?>
 

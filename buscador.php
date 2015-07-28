@@ -8,7 +8,7 @@ if(isset($_POST['search'])){
 }else{
 	 $search = '';
 }
-$consulta = "SELECT * FROM servicio WHERE claveServicio LIKE '%$search%' ";
+$consulta = "SELECT * FROM Servicio WHERE claveServicio LIKE '%$search%' ";
 $resultado = mysql_query($consulta,$conexion) or die(mysql_error());
 //$resultado = mysql_query($conexion,$consulta);
 $fila = mysql_fetch_array($resultado);

@@ -1,6 +1,6 @@
 <?php
 	require_once("includes/header.php");
-	$sql = "SELECT * FROM servicio";
+	$sql = "SELECT * FROM Servicio";
 	$res = mysql_query($sql,$conexion);
 ?>
 
@@ -84,7 +84,7 @@
 			<?php
 				
 				if($_POST){
-					$sqlInsert = "INSERT INTO servicio(idServicio,claveServicio,descripcion,precio) values
+					$sqlInsert = "INSERT INTO Servicio(idServicio,claveServicio,descripcion,precio) values
 					 (null,'".$_POST['claveServicio']."','".$_POST['descripcion']."','".$_POST['precio']."')";
 
 					$resInsert = mysql_query($sqlInsert,$conexion);
