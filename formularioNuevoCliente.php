@@ -69,9 +69,10 @@ require_once("includes/connection.php");
 					$res2 = mysql_query($sql2,$conexion) or die(mysql_error());
 					$reg2 = mysql_fetch_array($res2);
 					
-					
+					$id = $reg2['idPersona'];
 					$sql = "INSERT INTO Cliente values ('$id',now())";
 					$res = mysql_query($sql,$conexion) or die(mysql_error());
+                    
 				}
 			?>
 		

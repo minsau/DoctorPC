@@ -16,16 +16,16 @@ for($i=1;$i <= count($_POST['precio']);$i++){
 
 }
 
-$sql = "insert into venta values (null,".$idEmpleado.",".$idCliente.",".$costoTotal.",now(),".$anticipoTotal.")";
+$sql = "insert into Venta values (null,".$idEmpleado.",".$idCliente.",".$costoTotal.",now(),".$anticipoTotal.")";
 $res = mysql_query($sql,$conexion) or die(mysql_error());
 
-$sql = "SELECT * FROM venta order by idVenta desc limit 0,1";
+$sql = "SELECT * FROM Venta order by idVenta desc limit 0,1";
 $res = mysql_query($sql,$conexion) or die(mysql_error());
 
 $idVenta = mysql_fetch_array($res);
 
 for($i=1;$i<=count($_POST['servicio']);$i++){
-	$sql = "insert into servicio_has_venta values (null,".$_POST['idServicio']{$i}.",".$idVenta[0].",'".$_POST['descripcion']{$i}."',".$_POST['anticipo']{$i}.",0)";
+	$sql = "insert into Servicio_has_venta values (null,".$_POST['idServicio']{$i}.",".$idVenta[0].",'".$_POST['descripcion']{$i}."',".$_POST['anticipo']{$i}.",0)";
 	$res = mysql_query($sql,$conexion) or die(mysql_error());
 }
 

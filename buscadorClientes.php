@@ -52,4 +52,5 @@ $total = mysql_num_rows($resultado);
 
 </div>
 <?php } ?>
+	<div id="Sinresultados" ><ul><li><a href="formularioNuevoCliente.php">No esta en la lista</a></li></ul> </div>
 	</div>
