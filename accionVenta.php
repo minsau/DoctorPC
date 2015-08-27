@@ -15,20 +15,20 @@ for($i=1;$i <= count($_POST['precio']);$i++){
 	$anticipoTotal+=$_POST['anticipo']{$i};
 
 }
-
+//echo "comienzo<br>";
 $sql = "insert into Venta values (null,".$idEmpleado.",".$idCliente.",".$costoTotal.",now(),".$anticipoTotal.")";
 $res = mysql_query($sql,$conexion) or die(mysql_error());
-
+//echo "1<br>";
 $sql = "SELECT * FROM Venta order by idVenta desc limit 0,1";
 $res = mysql_query($sql,$conexion) or die(mysql_error());
 
 $idVenta = mysql_fetch_array($res);
 
 for($i=1;$i<=count($_POST['servicio']);$i++){
-	$sql = "insert into Servicio_has_venta values (null,".$_POST['idServicio']{$i}.",".$idVenta[0].",'".$_POST['descripcion']{$i}."',".$_POST['anticipo']{$i}.",0)";
+	$sql = "insert into Servicio_has_Venta values (null,".$_POST['idServicio']{$i}.",".$idVenta[0].",'".$_POST['descripcion']{$i}."',".$_POST['anticipo']{$i}.",0)";
 	$res = mysql_query($sql,$conexion) or die(mysql_error());
 }
-
+//echo "2<br>";
 $sql = "SELECT * FROM Persona  where idPersona = $idCliente";
 $res = mysql_query($sql,$conexion) or die(mysql_error());
 $reg = mysql_fetch_array($res) or die(mysql_error());
@@ -42,7 +42,7 @@ $reg = mysql_fetch_array($res) or die(mysql_error());
 
 $nombreEmpleado = "Atendio: ".$reg['nombresPersona']." ".$reg['aPaterno']." ".$reg['aMaterno'];
 $nombreEmpleado = utf8_decode($nombreEmpleado);
-
+//echo "3<br>";
 $fecha = "Fecha: ".formatDate(date('Y-m-d'));
 
    for($j = 1; $j<=count($_POST['servicio']);$j++){
