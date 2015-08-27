@@ -105,11 +105,19 @@ body{
 
 .tabla tbody tr td{
 	height: 30px;
+	padding-left: 30px;
+	padding-right: 30px;
 }
 
 .busqueda {
 	margin:auto;
 }
+.busqueda tr:hover{
+	font-size: 20px;
+	cursor: pointer;
+}
+
+
 
  .nombresBusqueda{
 	width: 350px;
@@ -121,3 +129,87 @@ body{
 .link-to tbody tr:hover{
 	cursor: pointer;
 }
+
+#Sinresultados{
+	width:100%;
+	padding:50px;
+}
+
+#Sinresultados ul li{
+ list-style-image: url("../img/mas_50pxdown.png");
+}
+
+#form-NuevoCliente{
+	position: absolute;	
+	left:30%;
+}
+
+.info{
+	color: black;
+	font-size: 20px;
+	border-radius: 15px;
+	padding: 10px;
+	background-color:#5db7a5;
+	width:30%;
+}
+
+.newcostumer{
+	position: absolute;
+   top: 35%;
+   left: 32.5%;
+}
+
+#tablaCompra{
+	position:absolute;
+	top: 90px;
+	left:-10%;
+	color: black;
+	font-size:20;
+}
+
+#tablaCompra #thead{
+	background-color: #5db7a5;
+	padding-left:25px;
+	padding-right: 25px;
+	font-size:25px;
+}
+
+#tablaCompra #thead td{
+	empty-cells:hide;
+	min-width: 100px;
+	max-width: 150px;
+	padding-left:25px;
+   padding-right: 25px;
+	padding-top: 0px;
+}
+
+#tablaCompra input[type=button]{
+	width:75px;
+	height: 35px;
+	margin-top: -20px;
+}
+
+#tablaCompra input[type=text]{
+	width:50px;
+	border-width:0;
+	text-align:center;
+	font-size: 18px;
+}
+#tablaCompra textarea{
+	height: 35px;
+}
+#venta{
+	position:fixed;	
+	top:490px;
+	left:1100px;
+	width:100px;
+	background-color:#6db7a5;
+	padding:15px;
+	border-radius:10px;
+}
+
+#venta button, input[type=submit]{
+	width:105px;
+	height: 35px;
+}
+
