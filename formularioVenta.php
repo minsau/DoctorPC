@@ -44,7 +44,7 @@ require_once("buscarHoras.php");
 		    nuevaCelda = nuevaFila.insertCell(-1);
 		    nuevaCelda.innerHTML = "<td class='tbody'><input type='text' size='10' name='precio[" + posicionCampo + "]' class = 'precio' value = '$" +precio+".00' readonly></td>";
 		    nuevaCelda = nuevaFila.insertCell(-1);
-		    nuevaCelda.innerHTML = "<td class='tbody'><input type='text' size='10' name='anticipo[" + posicionCampo + "]' class = 'precio' value='0' ></td>";
+		    nuevaCelda.innerHTML = "<td class='tbody'><input type='text' size='10' name='anticipo[" + posicionCampo + "]' class = 'precio' value='0' onblur='agregarPesos('anticipo[" + posicionCampo+ ")' ></td>";
 		    nuevaCelda = nuevaFila.insertCell(-1);
 		    nuevaCelda.innerHTML = "<td class='tbody'><input type='button' value='Eliminar' onclick='eliminarServicio(this)'></td>";
 		    posicionCampo++;
